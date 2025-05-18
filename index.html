@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guide to Git for the Relatively Clueless</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/night-owl.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  </head>
+  <body>
+    <div id="non-footer">
+      <div id="nav">
+        <ul>
+          <li><a href="#git-setup">Git: The Setup</a></li>
+          <li><a href="#git-punchline">Git: The Punchline</a></li>
+          <li>
+            <a href="#github"
+              >Time to Address the GitHub-Shaped Elephant in the Room</a
+            >
+          </li>
+          <li><a href="#joyride">Take Git for a Joyride</a></li>
+          <li><a href="#branch">Branch Out a Bit</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <h1>Guide to Git for the Relatively Clueless</h1>
+
+        <p>
+          So, you've started studying programming and have finally had enough of
+          pretending to know what's happening when people talk about Git. This
+          might just be the guide for you, young Padawan. This guide will help
+          you set up Git and learn enough of the basics to start feeling a
+          little more in the loop the next time your friends start speaking
+          Greek.
+        </p>
+
+        <aside>
+          This guide assumes that you are somewhat familiar with using the
+          terminal. If not, you may want to learn some of the basics of using
+          the command line. Trust me, it will open doors beyond just using Git
+          from the terminal. You could even use a terminal editor and one-up
+          your friends.
+        </aside>
+
+        <h2 id="git-setup">Git: The Setup</h2>
+
+        <blockquote>
+          <p>Why did the programmer break up with Git?</p>
+        </blockquote>
+
+        <p>
+          Before we begin, a quick distinction: Git is <i>not</i> the same as
+          GitHub. Git is the actual version control system (VCS) that tracks
+          your changes, whereas GitHub is a platform that hosts Git repositories
+          and where Gits come together to enjoy a song and a drink.
+        </p>
+
+        <h3>Install Git</h3>
+
+        <p>
+          Head over to the
+          <a href="https://git-scm.com/downloads"
+            >Downloads page on the Git website</a
+          >
+          and follow the instructions to install Git for your operating system.
+          I'll wait here.
+        </p>
+
+        <h3>Set Up Your Details</h3>
+
+        <p>
+          Hey, welcome back! Now that you've (hopefully) successfully installed
+          Git, let's set up your user details. These details are included with
+          each commit to track who was responsible for a change so you can blame
+          them when they break the codebase.
+        </p>
+
+        <p>
+          If you're a MacOS or Linux user, launch the terminal application.
+          Windows users, launch the Git BASH emulator that should have come
+          packaged with your Git install.
+        </p>
+
+        <aside>
+          While I have you here Windows users, I must warn you that your future
+          is going to be a little more frustrating than MacOS and Linux users.
+          Developer tooling just seems to work a little less painfully on
+          Unix-based systems. While the Windows experience isn't <i>too</i> bad,
+          if you do get frustrated in the future, you may want to consider
+          dual-booting Linux, using a virtual machine or using the Windows
+          Subsystem for Linux.
+        </aside>
+
+        <p>
+          Typically, you shouldn't blindly execute terminal commands from the
+          Internet, but you can trust me (Can I borrow a cool $500?). These
+          commands are going to configure the user details for your local Git
+          install. When executing these commands, keep the quotes, but replace
+          the contents inside with your own details.
+        </p>
+
+        <pre><code class="language-bash">
+git config --global user.name "Peter Parker"
+git config --global user.email "peter.parker@dailybugle.com"
+    </code></pre>
+
+        <h2 id="git-punchline">Git: The Punchline</h2>
+
+        <blockquote>
+          <p>Because they couldn't commit!</p>
+        </blockquote>
+
+        <p>
+          You've likely worked on an assignment and saved multiple copies of it
+          as
+          <code>assignment_draft.docx</code>,
+          <code>assignment_final.docx</code> and
+          <code>assignment_final_final.docx</code>. With each edit, you probably
+          wanted to save the new version while still keeping the previous ones
+          in case you wanted to come back to them.
+        </p>
+
+        <p>
+          This type of versioning can get out of hand when you want to store
+          versions of <i>multiple</i> files. It's also inefficient because each
+          new version contains the contents of the <i>entire</i> file, even the
+          parts that haven't changed since the last version.
+        </p>
+
+        <p>
+          This can be resolved using a VCS à la Git. When you save in Git, only
+          the changes since the previous version are recorded and added to a
+          history of all previous versions. Like a time machine, Git lets you go
+          back to previous versions, compare changes and even revert to earlier
+          versions.
+        </p>
+
+        <aside>
+          <p>
+            Git is a distributed version control system, which is one of three
+            main types of such systems.
+          </p>
+
+          <h3>Local Version Control</h3>
+
+          <p>
+            In a local VCS, changes are managed and stored directly on the local
+            machine. If you use Git locally&mdash;without hosting your
+            repository on a remote server&mdash;it behaves as a local VCS.
+          </p>
+
+          <p>
+            A local VCS doesn't really make it easy to share code with
+            collaborators and if your machine fails, you may lose all your data.
+            From experience, that is not enjoyable at all.
+          </p>
+
+          <h3>Centralised Version Control</h3>
+
+          <p>
+            These improve upon local systems by featuring a single, central
+            server that hosts all versions of the project files. Individual
+            developers have their own copies of the project but must connect to
+            their server to retrieve the latest version and commit their
+            changes.
+          </p>
+
+          <p>
+            This makes collaboration easier and reduces the risk of losing data
+            due to failure of the local machine. But wait...what happens if the
+            server goes down?
+          </p>
+
+          <h3>Distributed Version Control</h3>
+
+          <p>
+            We finally arrive at the next iteration of version control. In
+            addition to a central server that hosts the entire project,
+            distributed version control lets each developer clone the entire
+            repository to their local machine&mdash;allowing them to work
+            without requiring constant connection with the server.
+          </p>
+
+          <p>
+            You can commit changes to your local repository and when ready to
+            push your changes or get others', you can interact with the central
+            server. This makes collaboration possible, eliminates the single
+            point of failure and lets you have a moment to think before you
+            decide if you
+            <i>really</i> want to push that change to the central repository.
+          </p>
+
+          <p>
+            If you'd like to read more about version control, I recommend
+            <a
+              href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control"
+              >this page on the Git website</a
+            >.
+          </p>
+        </aside>
+
+        <h2 id="github">
+          Time to Address the GitHub-Shaped Elephant in the Room
+        </h2>
+
+        <p>
+          While Git is a standalone piece of software, in practice you will
+          likely be using it in conjunction with GitHub or another platform
+          providing hosting for Git repositories. It just so happens that GitHub
+          is widely used. So, let's finally set up your GitHub profile.
+        </p>
+
+        <p>
+          Head over to the <a href="https://github.com/">GitHub website</a> and
+          create an account. Again, I'll wait.
+        </p>
+
+        <p>
+          Back already? Geez, can I have a break? Anyway, now that you've
+          created a GitHub account, you need to link it to your local machine,
+          so you don't have to log in with your credentials each time you want
+          to interact with the remote. This can be done by creating an SSH key
+          pair which consists of two cryptographically linked files.
+        </p>
+
+        <ul>
+          <li>
+            Private key: A secret key that'll reside on your local machine. It's
+            like a digital password only known to the machine.
+          </li>
+          <li>
+            Public key: A key you can share with remote servers like GitHub.
+            It's like a digital lock that will only unlock when the machine
+            attempting to connect provides the corresponding private key.
+          </li>
+        </ul>
+
+        <p>
+          Run the following command to generate an SSH key. Press
+          <kbd>Enter</kbd> through all the prompts.
+        </p>
+
+        <pre><code class="language-bash">
+ssh-keygen
+    </code></pre>
+
+        <p>
+          You can view the generated key using the following command. Leave the
+          terminal open as you will come back to this output in a moment.
+        </p>
+
+        <pre><code class="language-bash">
+cat ~/.ssh/id_ed25519.pub
+    </code></pre>
+
+        <p>
+          Log into your GitHub profile and navigate to the "SSH and GPG keys"
+          section under the Settings. Click the button to create a new SSH key
+          and give it a name that describes the device this key is associated
+          with. Copy the output of your public key from the terminal, paste it
+          into the field on GitHub and click the button to add the key.
+          Congratulations, you now wield a modicum of power in your hands.
+        </p>
+
+        <h2 id="joyride">Take Git for a Joyride</h2>
+
+        <p>
+          Let's see what a simple Git workflow looks like. Create a new
+          repository from your GitHub account and name it something
+          descriptive&mdash;for example, <code>learning-git</code>. Once the
+          repository is created, click the Code button, then the SSH option and
+          copy the link to your repository.
+        </p>
+
+        <p>
+          In your terminal, navigate to the directory where you would like to
+          clone this repository and run the following command.
+        </p>
+
+        <pre><code class="language-bash">
+git clone your-repo-link
+    </code></pre>
+
+        <p>
+          This will create a copy of your repository on your local machine by
+          creating a directory with the same name. Inside this directory, create
+          a file called <code>baby_steps.txt</code> and run
+          <code>git status</code>.
+        </p>
+
+        <p>
+          Git will tell you that file is untracked. Now is a good time to
+          introduce the Holy Trinity of Git trees: the HEAD, the Staging Area
+          and the Working Directory. Your file is currently in the Working
+          Directory&mdash;the place where files are initially as they are being
+          edited.
+        </p>
+
+        <p>
+          When you are ready to commit, run <code>git add baby_steps.txt</code>.
+          This moves the file from the Working Directory to the Staging
+          Area&mdash;a kind of waiting room for files before they are sent on
+          their way. Running <code>git status</code> now will tell you that this
+          file is now a change to be committed.
+        </p>
+
+        <p>
+          Let's put the therapy to good use and finally commit. Run
+          <code>git commit -m "Take first step towards learning Git"</code> to
+          commit these changes. The <code>-m</code> flag tells Git that this
+          commit will have an associated message which is provided in quotes.
+          There's plenty of advice online about writing good commit messages,
+          but all I'll recommend is to be succinct and meaningful. For example,
+          do not write a message such as "propah progress", which is a commit
+          message I have actually seen.
+        </p>
+
+        <p>
+          Upon committing, Git will create a snapshot of the files in the
+          Staging Area and record it in history. HEAD will be updated to this
+          latest commit and the Staging Area and Working Directory will be left
+          clean once again. Your local repository is now one commit ahead of the
+          remote since the changes haven't been pushed yet. Running
+          <code>git log</code> will show you the commit history for this
+          repository along with details such as the time of the commit and the
+          person responsible for this egregiousness.
+        </p>
+
+        <p>
+          When you're ready to push your changes to the remote, run
+          <code>git push origin main</code>.
+        </p>
+
+        <h2 id="branch">Branch Out a Bit</h2>
+
+        <p>
+          By default, a repository has a single branch called
+          <code>main</code> and your commits are added onto this branch.
+          However, Git allows you to create other branches and have multiple
+          different versions of your project existing at the same time. Very
+          Christopher Nolan-esque. To create a branch, run
+          <code>git branch branch-name</code> and then
+          <code>git checkout branch-name</code> to switch to this branch so that
+          future commits apply onto it.
+        </p>
+
+        <p>
+          To see all the branches in your repository, run
+          <code>git branch</code>. Your current branch is typically shown with
+          an asterisk. Once you've made some commits on a branch and want to
+          apply the changes to main, follow these steps:
+        </p>
+
+        <ol>
+          <li>
+            Change back to <code>main</code> with <code>git checkout main</code>
+          </li>
+          <li>
+            Run <code>git merge branch-name</code> to merge the changes from the
+            other branch into <code>main</code>
+          </li>
+          <li>
+            Trim those extra branches (if not needed) with
+            <code>git branch -d branch-name</code>
+          </li>
+        </ol>
+
+        <p>
+          If the same file has been changed in different ways on separate
+          branches, you will run into a merge conflict when attempting these
+          steps. In such a case, you'll have to sit back as the branches battle
+          to the death and only the victor remains. If you're not into watching
+          branches fight each other for sport, you can simply resolve the merge
+          conflict yourself.
+          <a
+            href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line"
+            >This page from GitHub's documentation</a
+          >
+          does a better job of explaining this than I possibly can, so I'm just
+          linking to it. I know, I'm disappointed in me too.
+        </p>
+
+        <h2 id="conclusion">Conclusion</h2>
+
+        <p>
+          You should now be able to use Git more or less productively. The
+          commands covered here tend to make up most of the daily workflow and I
+          hope that you've learnt enough to discover the rest yourself. There
+          are
+          <i>many</i> more topics to be covered and I'll hopefully get to them
+          at some point in the future (Don't hold me to that though). Hopefully,
+          now you can stop acting like you know what your friends are talking
+          about and start <i>barely</i>
+          understanding what they're talking about.
+        </p>
+      </div>
+    </div>
+
+    <footer>Copyright (c) 2025 Zohair Gandhi. All Rights Reserved.</footer>
+
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

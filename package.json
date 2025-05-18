@@ -1,0 +1,22 @@
+{
+  "name": "guide-to-git",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZohairGandhi/guide-to-git.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZohairGandhi/guide-to-git/issues"
+  },
+  "homepage": "https://github.com/ZohairGandhi/guide-to-git#readme",
+  "description": "",
+  "devDependencies": {
+    "prettier": "3.5.3"
+  }
+}

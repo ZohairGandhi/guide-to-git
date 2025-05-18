@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1b26;
+  color: #a9b1d6;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.3rem;
+  line-height: 2.5rem;
+}
+
+#non-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+#nav {
+  flex-basis: 25%;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+#nav ul {
+  position: sticky;
+  top: 2rem;
+}
+
+#nav li::marker {
+  font-size: 1rem;
+}
+
+h1,
+h2,
+h3 {
+  color: #7aa2f7;
+  margin: 1.5rem 0;
+}
+
+h1 {
+  color: #7aa2f7;
+}
+
+h2 {
+  color: #e0af68;
+}
+
+h3 {
+  color: #9ece6a;
+}
+
+p,
+aside {
+  margin: 1rem 0;
+}
+
+aside {
+  font-size: 1rem;
+  background-color: #24283b;
+  padding: 0.8rem;
+  border-radius: 2rem;
+}
+
+blockquote {
+  background-color: #24283b;
+  padding-left: 1rem;
+  border-left: solid 0.5rem #a9b1d6;
+}
+
+a {
+  text-decoration: none;
+  color: #2ac3de;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+pre code {
+  font-size: 1rem;
+  line-height: 1rem;
+  height: min-content;
+}
+
+code {
+  background-color: #011627;
+  color: #d6deeb;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+}
+
+ul,
+ol {
+  margin-left: 3rem;
+}
+
+ul li::marker,
+ol li::marker {
+  color: #e0af68;
+}
+
+ul li::marker {
+  font-size: 2rem;
+}
+
+footer {
+  font-size: 1rem;
+  text-align: center;
+  background-color: #24283b;
+  padding: 0.5rem;
+}
