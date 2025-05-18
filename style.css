@@ -85,6 +85,7 @@ pre code {
   font-size: 1rem;
   line-height: 1rem;
   height: min-content;
+  max-width: 100vw;
 }
 
 code {
@@ -113,4 +114,10 @@ footer {
   text-align: center;
   background-color: #24283b;
   padding: 0.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  #non-footer {
+    flex-direction: column;
+  }
 }
